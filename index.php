@@ -1,22 +1,25 @@
+<?php
+    include_once __DIR__ . "/includePath.php";
+    include_once postiPath;
+    include_once macchinePath;
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        if(isset($_POST["targa"])){
+            insertMacchina($_POST["targa"]);
+        }
+
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include __DIR__ . "/includePath.php" ?>
-    <?php 
-        include postiPath;
-        include macchinePath;
-    ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <?php
-        if(isset($_POST["targa"])){
-            insertMacchina($_POST["targa"]);
-        }
-    ?>
-
     <?php if(getPostiTotali() > 0): ?>
         <form method="post" action=".">
             <h3>Inserisci Targa</h3>
@@ -35,7 +38,13 @@
         ?>
             <?php foreach($listaMacchine as $macchina): ?>
                 <div class="divMacchina">
-                    <h3>Auto N. <?php echo $i + 1 ?></h3>
+                    <div>
+                        <h3>Auto N. <?php echo $i + 1 ?></h3>
+                        <form method="post" action=<?php echo uscitaPath ?>>
+                            <input type="hidden" name="delete" value=<?php echo $macchina["targa"] ?> >
+                            <button type="success">Uscita</button>
+                        </form>
+                    </div>
                     Targa : <?php echo $macchina["targa"] ?> <br>
                 </div>
                 <?php $i++ ?>

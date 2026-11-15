@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . "/../includePath.php";
+include_once __DIR__ . "/../includePath.php";
 
 function getPostiTotali(){
     if(file_exists(configJsonPath)){
@@ -10,5 +10,23 @@ function getPostiTotali(){
             )["postiTotali"];
     }
     return -1;
+}
+
+function removePosto(){
+    if(file_exists(configJsonPath)){
+        $toWrite = getPostiTotali() - 1;
+        $file = fopen(configJsonPath, "w");
+        fwrite($file, json_encode(array("postiTotali"=>$toWrite)));
+        fclose($file);
+    }
+}
+
+function addPosto() {
+    if(file_exists(configJsonPath)){
+        $toWrite = getPostiTotali() + 1;
+        $file = fopen(configJsonPath, "w");
+        fwrite($file, json_encode(array("postiTotali"=>$toWrite)));
+        fclose($file);
+    }
 }
 ?>

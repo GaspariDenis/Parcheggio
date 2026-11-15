@@ -1,6 +1,7 @@
 <?php
     if(!defined("indexPath")){
         define("indexPath", __DIR__ . "/index.php");
+        define("uscitaPath", __DIR__ . "/uscita/uscita.php");
 
         define("configJsonPath", __DIR__ . "/config/config.json");
         define("macchineJsonPath", __DIR__ . "/config/macchine.json");
